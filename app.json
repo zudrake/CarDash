@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "CarDash",
-    "slug": "carDash",
+    "name": "gamezone",
+    "slug": "gamezone",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",
