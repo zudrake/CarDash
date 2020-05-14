@@ -11,9 +11,9 @@ import AddCarForm from './addCarForm';
 export default function Home({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [cars, setCars] = useState([
-    { title: '1st Car', ODO: 5000, body: 'lorem ipsum', key: '1' },
-    { title: '2nd Car', ODO: 40000, body: 'lorem ipsum', key: '2' },
-    { title: '3rd Car', ODO: 331231, body: 'lorem ipsum', key: '3' },
+    { makes: '1st Car', ODO: 5000, model: 'lorem ipsum', year: 2020, key: '1' },
+    { makes: '2nd Car', ODO: 40000, model: 'lorem ipsum', year: 2020, key: '2' },
+    { makes: '3rd Car', ODO: 331231, model: 'lorem ipsum', year: 2020, key: '3' },
   ]);
 
   const addCar = (newCar) => {
@@ -51,7 +51,7 @@ export default function Home({ navigation }) {
       <FlatList data={cars} renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
           <Card>
-            <Text style={globalStyles.titleText}>{item.title}</Text>
+            <Text style={globalStyles.titleText}>{item.makes}</Text>
           </Card>
         </TouchableOpacity>
       )} />
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   modalClose: {
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 0,
   },
   modalContent: {

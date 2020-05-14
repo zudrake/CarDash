@@ -10,9 +10,9 @@ export default function ReviewDetails({ navigation }) {
     <View style={globalStyles.container}>
       <Card>
         <Text style={globalStyles.titleText}>
-          {navigation.getParam('title')}
+          {navigation.getParam('makes')}
         </Text>
-        <Text>{navigation.getParam('body')}</Text>
+        <Text>{navigation.getParam('model')}</Text>
         <View style={styles.cardBody}>
           <Text>Need to change Oil</Text>
           <View style={styles.graph}>
