@@ -11,9 +11,9 @@ import AddCarForm from './addCarForm';
 export default function Home({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [cars, setCars] = useState([
-    { makes: '1st Car', ODO: 5000, model: 'lorem ipsum', year: 2020, key: '1' },
-    { makes: '2nd Car', ODO: 40000, model: 'lorem ipsum', year: 2020, key: '2' },
-    { makes: '3rd Car', ODO: 331231, model: 'lorem ipsum', year: 2020, key: '3' },
+    { makes: '1st Car', ODO: 5000, model: 'Sedan', year: 2020, key: '1' },
+    { makes: '2nd Car', ODO: 40000, model: 'Super Car', year: 2020, key: '2' },
+    { makes: '3rd Car', ODO: 331231, model: 'Truck  ', year: 2020, key: '3' },
   ]);
 
   const addCar = (newCar) => {
@@ -26,7 +26,6 @@ export default function Home({ navigation }) {
 
   return (
     <View style={globalStyles.container}>
-
       <Modal visible={modalOpen} animationType='slide'>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.modalContent}>
@@ -51,7 +50,13 @@ export default function Home({ navigation }) {
       <FlatList data={cars} renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
           <Card>
-            <Text style={globalStyles.titleText}>{item.makes}</Text>
+            <Text style={globalStyles.titleText}>
+              {item.model}
+
+            </Text>
+            <Text title='ODO'>ODO : {item.ODO}</Text>
+            <Text title='Year'>Year : {item.year}</Text>
+
           </Card>
         </TouchableOpacity>
       )} />
