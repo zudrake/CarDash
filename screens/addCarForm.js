@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Button, View, Text, Picker } from 'react-native';
-import { globalStyles } from '../styles/global.js';
+import { Button, View, Picker } from 'react-native';
 import { Formik } from 'formik';
 import CarData from '../assets/car-makes.json'; //json Data
 
@@ -55,8 +54,9 @@ export default function AddCarForm({ addCar }) {
         >
           {props => (
             <View  >
+              {/* Pickers */}
               < View >
-                {/* Picker Car Brand */}
+                {/* Picker #1 Car Brand */}
                 <View>
                   < Picker onValueChange={handleCarNameChange} selectedValue={selectedCar} >
                     {carList.map((item, index) => (
@@ -64,7 +64,7 @@ export default function AddCarForm({ addCar }) {
                     ))}
                   </ Picker>
                 </View>
-                {/* Picker Car Models */}
+                {/* Picker #2 Car Models */}
                 <View>
                   < Picker
                     onValueChange={(itemValue, itemIndex) => setSelectedModel(itemValue)}
@@ -77,9 +77,9 @@ export default function AddCarForm({ addCar }) {
                     })}
                   </Picker>
                 </View>
-                {/* Car Years */}
+                {/* Picker #3 Car Years */}
                 {< Picker
-                  onValueChange={(itemValue, itemIndex) => setYearValue(itemValue)}
+                  onValueChange={(itemValue) => setYearValue(itemValue)}
                   selectedValue={selectedYear}
                 >
                   {
