@@ -10,6 +10,9 @@ const RootDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: HomeStack,
   },
+  // CarWash: {
+  //   screen: CarWashStack,
+  // },
   About: {
     screen: AboutStack,
   },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, View, Picker } from 'react-native';
-import { Formik } from 'formik';
+import { Button, View, Picker, TextInput } from 'react-native';
+import { Formik, Field } from 'formik';
 import CarData from '../assets/car-makes.json'; //json Data
 
 const getYearList = () => {
@@ -12,7 +12,7 @@ const getYearList = () => {
   return yearList;
 }
 
-export default function AddCarForm({ addCar }) {
+export default function AddCarForm({ onSubmit }) {
   const cars = CarData;
   const [carList, setPickedValue] = useState([]);
   const [modelList, setModelList] = useState([]);
@@ -34,31 +34,41 @@ export default function AddCarForm({ addCar }) {
     }
   }, []);
 
-  const handleCarNameChange = (carIndex) => {
-    const currentBrandModelList = carList[carIndex].models;
-    setSelectedCar(carIndex);
-    setModelList(currentBrandModelList);
-  }
 
+  const getMakesNameByIndex = (index) => {
+    if (!carList) {
+      return;
+    }
+
+    return carList[index]?.name;
+  }
 
   const renderList = () => {
 
     return (
       <View >
         <Formik
-          initialValues={{ makes: '', model: '', year: '' }}
+          initialValues={{ makes: 0, model: undefined, year: 0 }}
           onSubmit={(values, actions) => {
+
+            const translatedFormValues = {
+              makes: getMakesNameByIndex(values.makes),
+              model: carList[values.makes].models[values.model].name,
+              year: values.year
+            };
+
+            onSubmit(translatedFormValues);
+
             actions.resetForm();
-            addCar(values);
           }}
         >
-          {props => (
+          {({ values, handleSubmit, setFieldValue }) => (
             <View  >
               {/* Pickers */}
               < View >
                 {/* Picker #1 Car Brand */}
                 <View>
-                  < Picker onValueChange={handleCarNameChange} selectedValue={selectedCar} >
+                  < Picker onValueChange={(value) => setFieldValue('makes', value)} selectedValue={values.makes} >
                     {carList.map((item, index) => (
                       <Picker.Item label={item.name} value={index} key={index} />
                     ))}
@@ -67,20 +77,18 @@ export default function AddCarForm({ addCar }) {
                 {/* Picker #2 Car Models */}
                 <View>
                   < Picker
-                    onValueChange={(itemValue, itemIndex) => setSelectedModel(itemValue)}
-                    selectedValue={selectedModel}
-
+                    onValueChange={(value) => setFieldValue('model', value)}
+                    selectedValue={values.model}
                   >
-                    {modelList.map((item, index) => {
+                    {(carList[values.makes]?.models || []).map((item, index) => {
                       return (<Picker.Item label={item.name} value={index} key={index} />);
-                      //console.log(item.name.models.name)
                     })}
                   </Picker>
                 </View>
                 {/* Picker #3 Car Years */}
                 {< Picker
-                  onValueChange={(itemValue) => setYearValue(itemValue)}
-                  selectedValue={selectedYear}
+                  onValueChange={(value) => setFieldValue('year', value)}
+                  selectedValue={values.year}
                 >
                   {
                     yearList.map((year) => (
@@ -92,7 +100,7 @@ export default function AddCarForm({ addCar }) {
               <View style={{ justifyContent: "flex-end" }}>
                 <Button
                   title='Submit'
-                  onPress={props.handleSubmit}
+                  onPress={handleSubmit}
                   style={{ flex: 1, flexDirection: 'col', justifyContent: 'flex-end' }} />
               </View>
             </View>

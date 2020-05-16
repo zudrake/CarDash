@@ -7,7 +7,22 @@ import { globalStyles } from '../styles/global';
 import { MaterialIcons } from '@expo/vector-icons';
 import Card from '../shared/card';
 import AddCarForm from './addCarForm';
+import { createAppContainer } from 'react-navigation';
+/*
+interface ICar {
+  id: Number;
+  makes: String;
+  year: Number;
 
+  currentODO: Number;
+  lastRecordedODO: Number;  //currentODO vs lastRecordedOOD
+  
+  lastOilChanged: Date; // vs Date.now()
+
+
+  updatedAt: Date;
+}
+*/
 export default function Home({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [cars, setCars] = useState([
@@ -16,11 +31,42 @@ export default function Home({ navigation }) {
     { makes: '3rd Car', ODO: 331231, model: 'Truck  ', year: 2020, key: '3' },
   ]);
 
-  const addCar = (newCar) => {
-    cars.key = Math.random().toString();
-    setCars((currentCars) => {
-      return [newCar, ...currentCars];
-    });
+  /*
+  const shouldOilChange = () => {
+    if(Date.now() - lastOilChanged >= Date.(1year) ) {
+      return true;
+    }
+
+    if(ODO - lastODO > 10000) {
+      return true;
+    }
+
+    return false;
+  }
+  */
+
+
+
+  const createCar = (car) => {
+    return {
+      makes: car.makes,
+      ODO: 0,
+      model: car.model,
+      year: car.year,
+      key: Math.random().toString()
+    };
+  }
+
+  const handleAddCar = (newCar) => {
+    // cars.key = Math.random().toString();
+    // setCars((currentCars) => {
+    //   return [newCar, ...currentCars];
+    // });
+
+    const initializedCar = createCar(newCar);
+    const newList = [...cars, initializedCar];
+
+    setCars(newList);
     setModalOpen(false);
   };
 
@@ -35,7 +81,7 @@ export default function Home({ navigation }) {
               style={{ ...styles.modalToggle, ...styles.modalClose }}
               onPress={() => setModalOpen(false)}
             />
-            <AddCarForm addCar={addCar} />
+            <AddCarForm onSubmit={handleAddCar} />
           </View>
         </TouchableWithoutFeedback>
       </Modal>
