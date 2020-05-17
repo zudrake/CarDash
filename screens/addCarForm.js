@@ -17,8 +17,8 @@ export default function AddCarForm({ onSubmit }) {
   const [carList, setPickedValue] = useState([]);
   const [modelList, setModelList] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
-  const [selectedModel, setSelectedModel] = useState(null);
-  const [selectedYear, setYearValue] = useState(null);
+  // const [selectedModel, setSelectedModel] = useState(null);
+  // const [selectedYear, setYearValue] = useState(null);
   const yearList = getYearList();
 
   const fetchList = () => {
