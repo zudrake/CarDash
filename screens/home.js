@@ -38,23 +38,8 @@ export default function Home({ navigation }) {
     { makes: 'Mercedes', ODO: 331231, model: 'S400', oDoInputDate: '2019-1-1', year: 2010, key: '3' },
   ]);
 
-  // const shouldOilChange = () => {
-  //   const dateBetween = ( lastOilChangedDay) => {
-  //   let oneYear = 1000 * 60 * 60 * 24 * 365;
-  //   let toDayMS = new Date.now();
-  //   let lastOilChangedDay = Date.getTime();
-  //   let diffMS = toDayMS - lastOilChanged;
-  //   return Math.abs(diffMS / oneYear);
-  // }
-  // if(DateBetwwen >= 1){
-  // return true;
-  // }
 
-  //   if (ODO - lastODO > 10000) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
+
 
   const createCar = (car) => {
     return {

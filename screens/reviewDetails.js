@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableHighlight, Alert } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Card, Button, Text, Divider } from 'react-native-elements'
 import ReviewModal from './reviewModal';
@@ -30,9 +30,42 @@ export default function ReviewDetails({ navigation }) {
       status: !status
     });
     console.log('toggle button handler: ' + status);
-    addDate()
+    shouldOilChange()
   }
-
+  const shouldOilChange = () => {
+    // oneYear
+    console.log('여기로 들오니?' + moment(currentDate) + '-------------' + moment(setCurrentDate.value))
+    if (moment(currentDate).diff(moment(setCurrentDate.value), "year") >= 1) {
+      Alert.alert(
+        'NEED TO ENGINE OIL CHANGE',
+        'It has been 1 year that you did not changed engine oil',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log("OK Pressed"),
+            style: "OK"
+          }
+        ],
+        { cancelable: false }
+      );
+    }
+    console.log('----ODOPARAM' + odoParam + '---odo-----' + odo)
+    if (Math.abs(odo - odoParam) > 10000) {
+      console.log('helloooooooo')
+      Alert.alert(
+        'NEED TO ENGINE OIL CHANGE',
+        "Your car is 10,000 miles running that you hasn't been  changed engine oil",
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log("OK Pressed"),
+            style: "OK"
+          }
+        ],
+        { cancelable: false }
+      );
+    }
+  }
   const handleReviewModelSubmit = (currentOdo, date) => {
     // console.log({ currentOdo });
     setOdo(currentOdo);
@@ -44,11 +77,6 @@ export default function ReviewDetails({ navigation }) {
     setIsModalOpen(false);
   }
 
-  // 오늘날자를 입력
-  const addDate = () => {
-    console.log('addDate() here')
-  }
-
   const renderDate = (date) => {
     console.log(date);
     const stringDate = moment().format("YYYY-MM-DD");
@@ -56,9 +84,7 @@ export default function ReviewDetails({ navigation }) {
       <Text>{stringDate}</Text>
     )
   }
-  // console.log(navigation.getParam("ODO"))
   return (
-    //요기 뷰를 모듈화 해서 위에서도 쓸수있게해야할듯. {const DetailViewList = ()}
     <View style={globalStyles.container}>
       <ReviewModal isVisible={isModalOpen} onSubmit={handleReviewModelSubmit} onClose={handleModalClose} />
 
