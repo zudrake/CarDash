@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Text, TouchableOpacity, FlatList, Modal,
+  StyleSheet, ScrollView, View, Text, TouchableOpacity, FlatList, Modal,
   TouchableWithoutFeedback, Keyboard
 } from 'react-native';
 import { globalStyles } from '../styles/global';
@@ -8,28 +8,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Card from '../shared/card';
 import AddCarForm from './addCarForm';
 
-// interface ICar {
-// id: Number;
-// makes: String;
-//   year: Number;
-//   currentODO: Number;
-//   lastRecordedODO: Number;  //currentODO vs lastRecordedOOD
-//   lastOilChanged: Date; // vs Date.now()
-//   updatedAt: Date;
-// }
 
-// const dateBetween = ( lastOilChangedDay) => {
-//   let oneYear = 1000 * 60 * 60 * 24 * 365;
-//   let toDayMS = new Date.now();
-//   let lastOilChangedDay = Date.getTime();
-//   let diffMS = toDayMS - lastOilChanged;
-//   return Math.abs(diffMS / oneYear);
-// }
-// if(DateBetwwen >= 1){
-// return true;
-// }
-
-export default function Home({ navigation }) {
+export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [cars, setCars] = useState([
@@ -63,7 +43,7 @@ export default function Home({ navigation }) {
   };
 
   return (
-    <View style={globalStyles.container}>
+    <ScrollView style={globalStyles.container}>
       <Modal visible={modalOpen} animationType='slide'>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.modalContent}>
@@ -86,7 +66,8 @@ export default function Home({ navigation }) {
       />
 
       <FlatList data={cars} renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
+         //onPress={() => navigation.navigate('ReviewDetails', item)
+        <TouchableOpacity>
           <Card>
             <Text style={globalStyles.titleText}>
               🚗 {item.makes.toUpperCase()}   {item.model.toUpperCase()}
@@ -98,7 +79,7 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       )} />
 
-    </View>
+    </ScrollView>
   );
 }
 

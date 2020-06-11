@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { globalStyles } from '../styles/global';
 
 export default function About() {
   return (
-    <View style={globalStyles.container}>
+    <ScrollView style={globalStyles.container}>
       <Card wrapperStyle={{ margin: 20 }} title='Why I made this App' >
         <Text style={{ paddingTop: 5, paddingBottom: 5 }}>Hi there,
           {"\n"}
@@ -39,6 +39,6 @@ export default function About() {
         </Text>
 
       </Card>
-    </View>
+    </ScrollView>
   );
 }

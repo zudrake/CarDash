@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Linking } from 'react-native';
+import { View, Text, Linking, ScrollView } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Card, Button, Icon } from 'react-native-elements';
 import * as MailComposer from 'expo-mail-composer';
@@ -14,7 +14,7 @@ const sendMail = () => {
 }
 export default function FeedBack() {
     return (
-        <View style={globalStyles.container}>
+        <ScrollView style={globalStyles.container}>
             <Card wrapperStyle={{ margin: 20 }} title='Feed Back' >
                 <View style={{ textAlign: 'center' }}>
 
@@ -51,6 +51,6 @@ export default function FeedBack() {
                     />
                 </View>
             </Card>
-        </View>
+        </ScrollView>
     );
 }
